@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="MvvmTutorials.ToolkitMessages.Views.StudentList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
+             xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DesignHeight="300"
+             d:DesignWidth="250"
+             d:Background="White"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:StudentListViewModel IsActive="True" />
+    </UserControl.DataContext>
+    <DockPanel>
+        <ToggleButton HorizontalAlignment="Left"
+                      DockPanel.Dock="Top"
+                      Style="{StaticResource ToggleButtonSwitch}"
+                      IsChecked="{Binding AllowAddNew}"
+                      Content="Allow Adding" />
+        <hc:TextBox Margin="0,10"
+                    hc:TitleElement.Title="Student Count"
+                    hc:TitleElement.TitlePlacement="Left"
+                    IsReadOnly="True"
+                    DockPanel.Dock="Top"
+                    Text="{Binding StudentCount, Mode=OneWay}" />
+        <ListBox Grid.Row="2"
+                 hc:TitleElement.Title="Student List"
+                 d:ItemsSource="{x:Null}"
+                 ItemsSource="{Binding Students}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}, {1}, {2}">
+                                <Binding Path="Name" />
+                                <Binding Path="Class" />
+                                <Binding Path="Phone" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</UserControl>

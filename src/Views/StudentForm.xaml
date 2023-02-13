@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="MvvmTutorials.ToolkitMessages.Views.StudentForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:MvvmTutorials.ToolkitMessages.ViewModels"
+             xmlns:local="clr-namespace:MvvmTutorials.ToolkitMessages.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             d:DesignHeight="300"
+             d:DesignWidth="200"
+             d:Background="White"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:StudentFormViewModel IsActive="True" />
+    </UserControl.DataContext>
+    <Border Padding="10"
+            BorderThickness="1"
+            BorderBrush="LightGray"
+            CornerRadius="5">
+        <hc:UniformSpacingPanel Orientation="Vertical" Spacing="10" ItemHorizontalAlignment="{x:Null}">
+            <hc:UniformSpacingPanel.Resources>
+                <Style TargetType="hc:TextBox" BasedOn="{StaticResource {x:Type hc:TextBox}}">
+                    <Setter Property="hc:TitleElement.TitlePlacement" Value="Left" />
+                    <Setter Property="hc:TitleElement.TitleWidth" Value="50" />
+                </Style>
+            </hc:UniformSpacingPanel.Resources>
+            <TextBlock Text="Student Form" FontSize="18" />
+            <hc:TextBox hc:TitleElement.Title="Name" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox hc:TitleElement.Title="Class" Text="{Binding Class, UpdateSourceTrigger=PropertyChanged}" />
+            <hc:TextBox hc:TitleElement.Title="Phone" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+            <Separator />
+            <Button HorizontalAlignment="Center" Content="Add New" Command="{Binding AddNewCommand}" />
+        </hc:UniformSpacingPanel>
+    </Border>
+</UserControl>
